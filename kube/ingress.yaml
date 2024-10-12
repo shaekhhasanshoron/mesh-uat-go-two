@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  generation: 1
+  labels:
+    app: mesh-uat-go-two
+  name: mesh-uat-go-two
+  namespace: klovercloud
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: app-two.kapetanios.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: mesh-uat-go-two
+                port:
+                  number: 80
+            path: /
+            pathType: ImplementationSpecific

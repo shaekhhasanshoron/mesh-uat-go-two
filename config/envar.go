@@ -18,12 +18,12 @@ func InitEnvironmentVariables() {
 
 	ServerPort = strings.TrimSpace(os.Getenv("SERVER_PORT"))
 	if ServerPort == "" {
-		ServerPort = "8081"
+		ServerPort = "8082"
 	}
 
 	MeshUatGoOneEndpoint = strings.TrimSpace(os.Getenv("MESH_UAT_GO_ONE_ENDPOINT"))
 	if MeshUatGoOneEndpoint == "" {
-		MeshUatGoOneEndpoint = "http://localhost:8080"
+		MeshUatGoOneEndpoint = "http://localhost:8081"
 	}
 
 	log.Println("Run Mode: " + RunMode)

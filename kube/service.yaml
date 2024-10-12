@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mesh-uat-go-two
+  name: mesh-uat-go-two
+  namespace: klovercloud
+spec:
+  ports:
+    - name: http-rest
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: mesh-uat-go-two
+  type: ClusterIP

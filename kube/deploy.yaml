@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mesh-uat-go-two
+  name: mesh-uat-go-two
+  namespace: klovercloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mesh-uat-go-two
+  template:
+    metadata:
+      labels:
+        app: mesh-uat-go-two
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: mesh-uat-go-two-envar-config
+          image: quay.io/klovercloud/service:mesh-uat-go-two-v1
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: mesh-uat-go-two
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8081
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources: {}

@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/labstack/echo/v4"
+	"log"
 	_type "mesh-uat-go-two/types"
 	"mesh-uat-go-two/utils"
 	"net/http"
@@ -63,6 +64,7 @@ func (h *home) HelloApiTwo(c echo.Context) error {
 func (h *home) MeshUatOneApiOne(c echo.Context) error {
 	resp, err := utils.MeshUatOneAppApiMeshOne()
 	if err != nil {
+		log.Println("Error Occurred Mesh-UAT-Go-One Api One: " + err.Error())
 		return c.JSON(http.StatusBadRequest, _type.Response().Error("Error Occurred Mesh-UAT-Go-One Api One: "+err.Error()))
 	}
 
@@ -77,6 +79,7 @@ func (h *home) MeshUatOneApiOne(c echo.Context) error {
 func (h *home) MeshUatOneApiTwo(c echo.Context) error {
 	resp, err := utils.MeshUatOneAppApiMeshTwo()
 	if err != nil {
+		log.Println("Error Occurred Mesh-UAT-Go-One Api Two: " + err.Error())
 		return c.JSON(http.StatusBadRequest, _type.Response().Error("Error Occurred Mesh-UAT-Go-One Api Two: "+err.Error()))
 	}
 
